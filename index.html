@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Nithya!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap');
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -23,7 +24,7 @@
             overflow: hidden;
             color: #333;
         }
-        
+
         .card-container {
             perspective: 1500px;
             width: 90%;
@@ -32,7 +33,7 @@
             max-height: 600px;
             position: relative;
         }
-        
+
         .card {
             width: 100%;
             height: 100%;
@@ -40,12 +41,13 @@
             transform-style: preserve-3d;
             transition: transform 1.2s ease-in-out;
         }
-        
+
         .card.flipped {
             transform: rotateY(180deg);
         }
-        
-        .front, .back {
+
+        .front,
+        .back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -54,7 +56,7 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
-        
+
         .front {
             background: #fff;
             display: flex;
@@ -64,7 +66,7 @@
             padding: 20px;
             text-align: center;
         }
-        
+
         .back {
             background: #fff;
             transform: rotateY(180deg);
@@ -73,7 +75,7 @@
             padding: 20px;
             overflow-y: auto;
         }
-        
+
         .front-images {
             display: flex;
             width: 100%;
@@ -82,7 +84,7 @@
             align-items: center;
             margin-bottom: 30px;
         }
-        
+
         .image-container {
             position: relative;
             height: 100%;
@@ -91,18 +93,18 @@
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-        
+
         .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        
+
         .image-container:hover img {
             transform: scale(1.05);
         }
-        
+
         .front-heading {
             font-family: 'Dancing Script', cursive;
             font-size: 3rem;
@@ -113,19 +115,19 @@
             transform: translateY(20px);
             animation: fadeIn 1s ease forwards 0.5s;
         }
-        
+
         .instruction {
             color: #888;
             font-size: 0.9rem;
             opacity: 0;
             animation: fadeIn 1s ease forwards 1.5s;
         }
-        
+
         .back-content {
             display: flex;
             height: 100%;
         }
-        
+
         .back-images {
             width: 40%;
             display: flex;
@@ -133,20 +135,20 @@
             gap: 15px;
             justify-content: space-between;
         }
-        
+
         .back-image {
             width: 100%;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .back-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .poem {
             width: 60%;
             padding: 0 20px;
@@ -157,17 +159,17 @@
             flex-direction: column;
             justify-content: center;
         }
-        
+
         .poem p {
             margin-bottom: 15px;
         }
-        
+
         .signature {
             text-align: right;
             font-style: italic;
             margin-top: 15px;
         }
-        
+
         .age-display {
             position: absolute;
             top: 50%;
@@ -179,7 +181,7 @@
             z-index: -1;
             opacity: 0.2;
         }
-        
+
         .flip-btn {
             position: absolute;
             bottom: -32px;
@@ -196,13 +198,13 @@
             transition: all 0.3s ease;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
-        
+
         .flip-btn:hover {
             background: #c49b2c;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .confetti {
             position: absolute;
             width: 10px;
@@ -210,23 +212,24 @@
             background-color: #f2d74e;
             border-radius: 0;
         }
-        
+
         @keyframes fadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes float {
             0% {
                 transform: translateY(0) rotate(0deg);
             }
+
             100% {
                 transform: translateY(-800px) rotate(360deg);
             }
         }
-        
+
         .stars {
             position: absolute;
             top: 0;
@@ -236,7 +239,7 @@
             pointer-events: none;
             z-index: -1;
         }
-        
+
         .star {
             position: absolute;
             width: 15px;
@@ -247,73 +250,147 @@
             opacity: 0;
             animation: twinkle 5s infinite;
         }
-        
+
         @keyframes twinkle {
             0% {
                 opacity: 0;
                 transform: scale(0.5);
             }
+
             50% {
                 opacity: 1;
                 transform: scale(1);
             }
+
             100% {
                 opacity: 0;
                 transform: scale(0.5);
             }
         }
-        
+
         @media (max-width: 768px) {
             .card-container {
                 height: 80vh;
             }
-            
+
             .front-heading {
                 font-size: 2.2rem;
             }
-            
+
             .front-images {
                 flex-direction: column;
                 gap: 15px;
             }
-            
+
             .image-container {
                 width: 90%;
                 height: 45%;
             }
-            
+
             .back-content {
                 flex-direction: column;
             }
-            
+
             .back-images {
                 width: 100%;
                 flex-direction: row;
                 height: 40%;
             }
-            
+
             .poem {
                 width: 100%;
                 font-size: 0.9rem;
                 padding: 15px 0;
             }
-            
+
             .age-display {
                 font-size: 5rem;
             }
+            .button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.wrapped-btn {
+    margin-top: 18px;
+    padding: 14px 30px;
+
+    border: none;
+    border-radius: 50px;
+
+    background: linear-gradient(
+        135deg,
+        #7b2ff7,
+        #f107a3
+    );
+
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition: all 0.35s ease;
+
+    box-shadow:
+        0 8px 25px rgba(123, 47, 247, 0.35),
+        0 0 20px rgba(241, 7, 163, 0.25);
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine Effect */
+.wrapped-btn::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(255,255,255,0.2);
+
+    transform: skewX(-25deg);
+
+    transition: 0.7s;
+}
+
+.wrapped-btn:hover::before {
+    left: 120%;
+}
+
+.wrapped-btn:hover {
+    transform: translateY(-4px) scale(1.04);
+
+    box-shadow:
+        0 12px 30px rgba(123, 47, 247, 0.45),
+        0 0 30px rgba(241, 7, 163, 0.4);
+}
+
+.wrapped-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 18px rgba(74, 0, 224, 0.35);
+}
         }
     </style>
 </head>
+
 <body>
     <div class="stars"></div>
-    
+
     <div class="card-container">
         <div class="card">
             <div class="front">
                 <div class="age-display">19</div>
                 <div class="front-images">
                     <div class="image-container">
-                        <img id="image1" src="/images//c1.png"Birthday Image 1">
+                        <img id="image1" src="/images//c1.png" Birthday Image 1">
                     </div>
                     <div class="image-container">
                         <img id="image2" src="/images/c2.jpg" alt="Birthday Image 2">
@@ -321,9 +398,39 @@
                 </div>
                 <h1 class="front-heading">Happy Birthday, Nithya!</h1>
                 <p class="instruction">Click anywhere to open your card</p>
-                <button class="flip-btn" st>Open Card</button>
+                <div class="button-group">
+    <button 
+onclick="window.location.href='wrapped.html'"
+style="
+    margin-top: 20px;
+    padding: 16px 34px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #7b2ff7, #f107a3);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    box-shadow: 0 8px 25px rgba(123, 47, 247, 0.35),
+                0 0 20px rgba(241, 7, 163, 0.25);
+    position: relative;
+"
+onmouseover="
+    this.style.transform='translateY(-4px) scale(1.04)';
+    this.style.boxShadow='0 12px 30px rgba(123,47,247,0.45), 0 0 30px rgba(241,7,163,0.4)';
+"
+onmouseout="
+    this.style.transform='translateY(0px) scale(1)';
+    this.style.boxShadow='0 8px 25px rgba(123,47,247,0.35), 0 0 20px rgba(241,7,163,0.25)';
+"
+>
+🎧 Your Friendship Wrapped is Ready
+</button>
+</div>
             </div>
-            
+
             <div class="back">
                 <div class="back-content">
                     <div class="back-images">
@@ -337,19 +444,20 @@
                             <img id="image5" src="/images/3.jpg" alt="Additional Photo 3">
                         </div> -->
                     </div>
-                    
+
                     <div class="poem">
                         <p>With time and growing age, I’ve seen how the reasons behind people's joy has quietly evolved.
-As a child, birthdays meant balloons, laughter, and houseful celebrations.
-But now, they hold a softer meaning —
-A reason to feel remembered,
-To hear their name spoken with warmth,
-To share fleeting smiles and gentle words with those who cross paths.
-I’ve learned that happiness isn’t always loud or grand —
-It often whispers through small gestures,
-In the simple magic of being thought of. Wishing you all the little moments that bring the biggest smiles,
-Because happiness truly lives in those quiet, thoughtful spaces.
-Have a beautiful year ahead!</p>
+                            As a child, birthdays meant balloons, laughter, and houseful celebrations.
+                            But now, they hold a softer meaning —
+                            A reason to feel remembered,
+                            To hear their name spoken with warmth,
+                            To share fleeting smiles and gentle words with those who cross paths.
+                            I’ve learned that happiness isn’t always loud or grand —
+                            It often whispers through small gestures,
+                            In the simple magic of being thought of. Wishing you all the little moments that bring the
+                            biggest smiles,
+                            Because happiness truly lives in those quiet, thoughtful spaces.
+                            Have a beautiful year ahead!</p>
                         <!-- <p>wish you many more happy returns of the day.</p>
                         <p>With time, I've seen how the reasons behind my joy have quietly changed.</p>
                         <p>As a child, birthdays meant balloons, laughter, and bouyant celebrations.</p>
@@ -369,31 +477,31 @@ Have a beautiful year ahead!</p>
             </div>
         </div>
     </div>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const card = document.querySelector('.card');
             const frontFlipBtn = document.querySelector('.front .flip-btn');
             const backFlipBtn = document.querySelector('.back .flip-btn');
             const frontSide = document.querySelector('.front');
-            
+
             // Event listeners for flipping the card
             frontFlipBtn.addEventListener('click', flipCard);
-            frontSide.addEventListener('click', function(e) {
+            frontSide.addEventListener('click', function (e) {
                 if (e.target !== frontFlipBtn) {
                     flipCard();
                 }
             });
             backFlipBtn.addEventListener('click', flipCard);
-            
+
             function flipCard() {
                 card.classList.toggle('flipped');
-                
+
                 if (card.classList.contains('flipped')) {
                     createConfetti();
                 }
             }
-            
+
             // Create stars in the background
             const starsContainer = document.querySelector('.stars');
             for (let i = 0; i < 20; i++) {
@@ -404,61 +512,62 @@ Have a beautiful year ahead!</p>
                 star.style.animationDelay = `${Math.random() * 5}s`;
                 starsContainer.appendChild(star);
             }
-            
+
             // Confetti effect when card is flipped
             function createConfetti() {
                 const confettiCount = 100;
                 const container = document.querySelector('body');
-                
+
                 const colors = ['#f2d74e', '#95e1d3', '#ff9a9e', '#a18cd1', '#fad0c4', '#fbc2eb'];
-                
+
                 for (let i = 0; i < confettiCount; i++) {
                     const confetti = document.createElement('div');
                     confetti.classList.add('confetti');
-                    
+
                     // Random position
                     confetti.style.left = `${Math.random() * 100}%`;
                     confetti.style.top = '0';
-                    
+
                     // Random size
                     const size = Math.random() * 10 + 5;
                     confetti.style.width = `${size}px`;
                     confetti.style.height = `${size}px`;
-                    
+
                     // Random color
                     confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    
+
                     // Random shape
                     const shapes = ['circle', 'square', 'triangle'];
                     const shape = shapes[Math.floor(Math.random() * shapes.length)];
-                    
+
                     if (shape === 'circle') {
                         confetti.style.borderRadius = '50%';
                     } else if (shape === 'triangle') {
                         confetti.style.width = '0';
                         confetti.style.height = '0';
                         confetti.style.backgroundColor = 'transparent';
-                        confetti.style.borderLeft = `${size/2}px solid transparent`;
-                        confetti.style.borderRight = `${size/2}px solid transparent`;
+                        confetti.style.borderLeft = `${size / 2}px solid transparent`;
+                        confetti.style.borderRight = `${size / 2}px solid transparent`;
                         confetti.style.borderBottom = `${size}px solid ${colors[Math.floor(Math.random() * colors.length)]}`;
                     }
-                    
+
                     // Animation
                     confetti.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
                     confetti.style.animationDelay = `${Math.random() * 2}s`;
-                    
+
                     container.appendChild(confetti);
-                    
+
                     // Remove confetti after animation
                     setTimeout(() => {
                         confetti.remove();
                     }, 5000);
                 }
             }
-            
+
             // Initially create some stars for decoration
             setTimeout(createConfetti, 500);
         });
     </script>
 </body>
+
 </html>

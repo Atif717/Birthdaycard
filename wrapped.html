@@ -1,0 +1,2697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nithya's Friendship Wrapped 🎵</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --green: #1DB954;
+            --green-bright: #1ed760;
+            --black: #000000;
+            --dark: #0a0a0a;
+            --card-dark: #111111;
+            --surface: #181818;
+            --surface2: #282828;
+            --white: #FFFFFF;
+            --offwhite: #E8E8E8;
+            --yellow: #FFD700;
+            --orange: #FF6B35;
+            --pink: #FF2D78;
+            --purple: #7B2D8B;
+            --teal: #00C9C8;
+            --text-muted: #9B9B9B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Bricolage Grotesque', sans-serif;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* ── SLIDE SYSTEM ── */
+        .slide {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ── FLOATING PARTICLES ── */
+        .particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float-up linear infinite;
+            opacity: 0.15;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.15;
+            }
+
+            90% {
+                opacity: 0.1;
+            }
+
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* ── SLIDE 1: COVER ── */
+        #slide-1 {
+            background: var(--black);
+            text-align: center;
+            gap: 20px;
+        }
+
+        #slide-1::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(29, 185, 84, 0.35) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                transform: translate(-50%, -60%) scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translate(-50%, -60%) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .cover-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--green);
+            background: rgba(29, 185, 84, 0.1);
+            border: 1px solid rgba(29, 185, 84, 0.3);
+            padding: 8px 20px;
+            border-radius: 100px;
+            animation: fade-in 0.6s ease forwards;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(56px, 12vw, 120px);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -4px;
+            position: relative;
+            z-index: 2;
+            animation: fade-up 0.8s 0.2s ease both;
+        }
+
+        .cover-title span {
+            color: var(--green);
+        }
+
+        .cover-sub {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+            animation: fade-up 0.8s 0.4s ease both;
+            max-width: 400px;
+        }
+
+        .cover-year {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+            animation: fade-up 0.8s 0.6s ease both;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: fade-in 1s 1.2s ease both, bounce 2s 2s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .scroll-hint span {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+        }
+
+        .scroll-hint .arrow {
+            font-size: 20px;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(8px);
+            }
+        }
+
+        /* ── SHARED SLIDE COMPONENTS ── */
+        .slide-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--green);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            opacity: 0.7;
+        }
+
+        .slide-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(36px, 7vw, 72px);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -2px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .slide-sub {
+            font-size: 15px;
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            color: var(--green);
+        }
+
+        .highlight-pink {
+            color: var(--pink);
+        }
+
+        .highlight-yellow {
+            color: var(--yellow);
+        }
+
+        .highlight-orange {
+            color: var(--orange);
+        }
+
+        /* ── SLIDE 2: BIG NUMBER ── */
+        #slide-2 {
+            background: linear-gradient(160deg, #0a1a0f 0%, #000 60%);
+            text-align: center;
+            gap: 0;
+        }
+
+        .big-number {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(100px, 25vw, 220px);
+            font-weight: 800;
+            color: var(--green);
+            line-height: 1;
+            letter-spacing: -8px;
+            animation: count-up 1.5s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes count-up {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+                filter: blur(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0);
+            }
+        }
+
+        .big-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .big-context {
+            margin-top: 32px;
+            font-size: 17px;
+            color: var(--offwhite);
+            max-width: 440px;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ── STATS GRID ── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform 0.2s, border-color 0.2s;
+            animation: fade-up 0.6s ease both;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(29, 185, 84, 0.3);
+        }
+
+        .stat-card .emoji {
+            font-size: 28px;
+        }
+
+        .stat-card .label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .stat-card .value {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -1px;
+        }
+
+        .stat-card .value.green {
+            color: var(--green);
+        }
+
+        .stat-card .value.pink {
+            color: var(--pink);
+        }
+
+        .stat-card .value.yellow {
+            color: var(--yellow);
+        }
+
+        .stat-card .desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── BAR RACE ── */
+        .bar-container {
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .bar-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            width: 80px;
+            text-align: right;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 40px;
+            background: var(--surface2);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding-left: 16px;
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
+            animation: bar-grow 1.2s ease-out both;
+            transform-origin: left;
+        }
+
+        @keyframes bar-grow {
+            from {
+                width: 0 !important;
+            }
+        }
+
+        .bar-fill.green {
+            background: var(--green);
+        }
+
+        .bar-fill.pink {
+            background: var(--pink);
+        }
+
+        .bar-fill.yellow {
+            background: var(--yellow);
+        }
+
+        .bar-fill.orange {
+            background: var(--orange);
+        }
+
+        .bar-fill.teal {
+            background: var(--teal);
+        }
+
+        /* ── SLIDE: WHO TEXTS MORE ── */
+        #slide-who {
+            background: var(--dark);
+            gap: 32px;
+        }
+
+        .split-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .compare-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .compare-card.winner {
+            border-color: var(--green);
+            background: rgba(29, 185, 84, 0.05);
+        }
+
+        .compare-card .name {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .compare-card .pct {
+            font-family: 'Syne', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            letter-spacing: -3px;
+            line-height: 1;
+        }
+
+        .compare-card .count {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+
+        .crown {
+            font-size: 32px;
+            animation: crown-bounce 1s ease infinite;
+        }
+
+        @keyframes crown-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-10deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(10deg);
+            }
+        }
+
+        .verdict {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--green);
+            background: rgba(29, 185, 84, 0.1);
+            padding: 6px 16px;
+            border-radius: 100px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+            margin-top: -8px;
+        }
+
+        /* ── ACHIEVEMENT CARDS ── */
+        #slide-achievements {
+            background: #0c0c0c;
+            gap: 32px;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .achievement {
+            background: linear-gradient(135deg, var(--surface) 0%, #1a1a1a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            animation: fade-up 0.5s ease both;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+        }
+
+        .achievement.gold::before {
+            background: linear-gradient(90deg, var(--yellow), transparent);
+        }
+
+        .achievement.green-a::before {
+            background: linear-gradient(90deg, var(--green), transparent);
+        }
+
+        .achievement.pink-a::before {
+            background: linear-gradient(90deg, var(--pink), transparent);
+        }
+
+        .achievement.orange-a::before {
+            background: linear-gradient(90deg, var(--orange), transparent);
+        }
+
+        .achievement.teal-a::before {
+            background: linear-gradient(90deg, var(--teal), transparent);
+        }
+
+        .achievement:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .achievement .ach-icon {
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+
+        .achievement .ach-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .achievement .ach-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .achievement .ach-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .achievement .ach-xp {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--green);
+            margin-top: 6px;
+        }
+
+        /* ── QUOTE CARDS ── */
+        #slide-quotes {
+            background: #070713;
+            gap: 32px;
+        }
+
+        .quotes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 760px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 28px 32px;
+            border-left: 3px solid var(--green);
+            animation: fade-left 0.6s ease both;
+            transition: all 0.3s;
+        }
+
+        .quote-card:nth-child(even) {
+            border-left-color: var(--pink);
+        }
+
+        .quote-card:nth-child(3n) {
+            border-left-color: var(--yellow);
+        }
+
+        .quote-card:hover {
+            transform: translateX(6px);
+        }
+
+        .quote-text {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .quote-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quote-who {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--green);
+            letter-spacing: 2px;
+        }
+
+        .quote-why {
+            font-size: 12px;
+            color: var(--text-muted);
+            max-width: 300px;
+            text-align: right;
+        }
+
+        /* ── PERSONALITY BREAKDOWN ── */
+        #slide-personality {
+            background: linear-gradient(160deg, #0a001a 0%, #000 70%);
+            gap: 32px;
+        }
+
+        .personality-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            width: 100%;
+            max-width: 860px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .personality-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .p-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .p-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .p-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .trait-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .trait-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trait-name {
+            font-size: 13px;
+            color: var(--offwhite);
+        }
+
+        .trait-pct {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--green);
+        }
+
+        .trait-bar {
+            height: 6px;
+            background: var(--surface2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .trait-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: var(--green);
+            animation: bar-grow 1s ease both;
+        }
+
+        .trait-bar-fill.pink {
+            background: var(--pink);
+        }
+
+        /* ── LORE TIMELINE ── */
+        #slide-lore {
+            background: var(--black);
+            gap: 32px;
+        }
+
+        .timeline {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--green), var(--pink), var(--yellow));
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 24px;
+            padding: 20px 0;
+            animation: fade-left 0.5s ease both;
+        }
+
+        .tl-dot {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 2px solid var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tl-content {
+            padding-top: 6px;
+        }
+
+        .tl-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--green);
+            margin-bottom: 6px;
+        }
+
+        .tl-text {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .tl-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── SLIDE GENRES ── */
+        #slide-genres {
+            background: linear-gradient(170deg, #0a0a00 0%, #000 70%);
+            gap: 32px;
+        }
+
+        .genres-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            width: 100%;
+            max-width: 860px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .genre-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            cursor: default;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .genre-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: var(--surface2);
+        }
+
+        .genre-emoji {
+            font-size: 36px;
+        }
+
+        .genre-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .genre-pct {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .genre-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── ROAST SECTION ── */
+        #slide-roast {
+            background: linear-gradient(150deg, #1a0000 0%, #000 70%);
+            gap: 32px;
+        }
+
+        .roast-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .roast-card {
+            background: rgba(255, 45, 120, 0.08);
+            border: 1px solid rgba(255, 45, 120, 0.2);
+            border-radius: 14px;
+            padding: 20px 24px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            animation: shake-in 0.5s ease both;
+        }
+
+        @keyframes shake-in {
+            0% {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .roast-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .roast-text {
+            font-size: 15px;
+            color: var(--offwhite);
+            line-height: 1.6;
+        }
+
+        .roast-text strong {
+            color: var(--pink);
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+        }
+
+        /* ── AI ANALYSIS FAKE ── */
+        #slide-ai {
+            background: #000;
+            gap: 32px;
+        }
+
+        .ai-box {
+            background: var(--surface);
+            border: 1px solid rgba(29, 185, 84, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .ai-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(29, 185, 84, 0.02) 2px,
+                    rgba(29, 185, 84, 0.02) 4px);
+            pointer-events: none;
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .ai-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.2;
+            }
+        }
+
+        .ai-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--green);
+        }
+
+        .ai-line {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 2.2;
+            padding-left: 22px;
+            border-left: 1px solid rgba(29, 185, 84, 0.2);
+        }
+
+        .ai-line .key {
+            color: var(--green);
+        }
+
+        .ai-line .val {
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .ai-line .val.pink {
+            color: var(--pink);
+        }
+
+        .ai-line .val.yellow {
+            color: var(--yellow);
+        }
+
+        /* ── COMPATIBILITY ── */
+        #slide-compat {
+            background: linear-gradient(180deg, #000 0%, #0a001a 100%);
+            gap: 32px;
+        }
+
+        .compat-ring {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .compat-ring svg {
+            position: absolute;
+            inset: 0;
+            animation: spin-slow 20s linear infinite;
+        }
+
+        @keyframes spin-slow {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .compat-center {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .compat-score {
+            font-family: 'Syne', sans-serif;
+            font-size: 72px;
+            font-weight: 800;
+            color: var(--green);
+            line-height: 1;
+            letter-spacing: -4px;
+        }
+
+        .compat-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+        }
+
+        .compat-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ── FUTURE PREDICTIONS ── */
+        #slide-future {
+            background: linear-gradient(160deg, #000814 0%, #000 70%);
+            gap: 32px;
+        }
+
+        .predictions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 760px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pred-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            animation: fade-up 0.5s ease both;
+            transition: all 0.3s;
+        }
+
+        .pred-card:hover {
+            border-color: rgba(29, 185, 84, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .pred-year {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--green);
+            margin-bottom: 10px;
+        }
+
+        .pred-text {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .pred-conf {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .pred-conf span {
+            color: var(--yellow);
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* ── FINAL SLIDE ── */
+        #slide-final {
+            background: var(--black);
+            text-align: center;
+            gap: 24px;
+            min-height: 100vh;
+        }
+
+        #slide-final::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(29, 185, 84, 0.2) 0%, transparent 60%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        .final-badge {
+            background: var(--green);
+            color: var(--black);
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 10px 24px;
+            border-radius: 100px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .final-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(42px, 9vw, 90px);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -3px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .final-message {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 480px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 2;
+        }
+
+        .final-message em {
+            color: var(--green);
+            font-style: normal;
+        }
+
+        .final-sig {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 2;
+            margin-top: 20px;
+        }
+
+        /* ── PRIME TIME SLIDE ── */
+        #slide-time {
+            background: linear-gradient(160deg, #00100a 0%, #000 60%);
+            gap: 32px;
+        }
+
+        .time-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 200px;
+            width: 100%;
+            max-width: 700px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .time-bar-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .time-bar-fill {
+            width: 100%;
+            background: var(--surface2);
+            border-radius: 6px 6px 0 0;
+            transition: all 0.5s;
+            position: relative;
+            animation: bar-rise 1s ease both;
+        }
+
+        .time-bar-fill.active {
+            background: var(--green);
+        }
+
+        .time-bar-fill.semi {
+            background: rgba(29, 185, 84, 0.4);
+        }
+
+        @keyframes bar-rise {
+            from {
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+        }
+
+        .time-bar-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .time-note {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .time-note strong {
+            color: var(--green);
+        }
+
+        /* ── EMOJI CLOUD ── */
+        #slide-emojis {
+            background: #0a0010;
+            gap: 32px;
+        }
+
+        .emoji-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .emoji-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            animation: pop-in 0.4s ease both;
+        }
+
+        @keyframes pop-in {
+            from {
+                transform: scale(0) rotate(20deg);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .emoji-char {
+            font-size: 40px;
+        }
+
+        .emoji-count {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* ── SLANG DICTIONARY ── */
+        #slide-slang {
+            background: var(--dark);
+            gap: 32px;
+        }
+
+        .slang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slang-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 20px;
+            animation: fade-up 0.4s ease both;
+        }
+
+        .slang-word {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--green);
+            margin-bottom: 6px;
+        }
+
+        .slang-def {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-left {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* stagger delays */
+        .stat-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stat-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stat-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .stat-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .achievement:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .achievement:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .achievement:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .achievement:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .achievement:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .achievement:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .quote-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .quote-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .quote-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .quote-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .tl-item:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .tl-item:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .tl-item:nth-child(3) {
+            animation-delay: 0.25s;
+        }
+
+        .tl-item:nth-child(4) {
+            animation-delay: 0.35s;
+        }
+
+        .tl-item:nth-child(5) {
+            animation-delay: 0.45s;
+        }
+
+        .tl-item:nth-child(6) {
+            animation-delay: 0.55s;
+        }
+
+        .emoji-item:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .emoji-item:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .emoji-item:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .emoji-item:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        .emoji-item:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .emoji-item:nth-child(6) {
+            animation-delay: 0.3s;
+        }
+
+        .emoji-item:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        .emoji-item:nth-child(8) {
+            animation-delay: 0.4s;
+        }
+
+        .slang-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .slang-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .slang-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .slang-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .slang-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .slang-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .pred-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .pred-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .pred-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .pred-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        /* ── NAV DOTS ── */
+        .nav-dots {
+            position: fixed;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-dot.active {
+            background: var(--green);
+            transform: scale(1.4);
+        }
+
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ── MUSIC VISUALIZER ── */
+        .vis {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 24px;
+        }
+
+        .vis-bar {
+            width: 3px;
+            background: var(--green);
+            border-radius: 2px;
+            animation: vis-dance 0.8s ease-in-out infinite alternate;
+        }
+
+        .vis-bar:nth-child(1) {
+            animation-duration: 0.6s;
+        }
+
+        .vis-bar:nth-child(2) {
+            animation-duration: 0.9s;
+            animation-delay: 0.1s;
+        }
+
+        .vis-bar:nth-child(3) {
+            animation-duration: 0.7s;
+            animation-delay: 0.2s;
+        }
+
+        .vis-bar:nth-child(4) {
+            animation-duration: 1.0s;
+            animation-delay: 0.05s;
+        }
+
+        .vis-bar:nth-child(5) {
+            animation-duration: 0.8s;
+            animation-delay: 0.15s;
+        }
+
+        @keyframes vis-dance {
+            from {
+                height: 4px;
+            }
+
+            to {
+                height: 20px;
+            }
+        }
+
+        /* ── HEADER BAR ── */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .top-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .top-logo .dot {
+            width: 10px;
+            height: 10px;
+            background: var(--green);
+            border-radius: 50%;
+        }
+
+        .top-progress {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .top-prog-bar {
+            width: 60px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .top-prog-fill {
+            height: 100%;
+            background: var(--green);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* ── CONFETTI OVERLAY (final slide) ── */
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            animation: confetti-fall linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .split-compare {
+                grid-template-columns: 1fr;
+            }
+
+            .personality-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .genres-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .predictions {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-dots {
+                display: none;
+            }
+
+            .top-bar {
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="top-logo">
+            <div class="dot"></div>
+            Friendship Wrapped
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+            <div class="vis">
+                <div class="vis-bar"></div>
+                <div class="vis-bar"></div>
+                <div class="vis-bar"></div>
+                <div class="vis-bar"></div>
+                <div class="vis-bar"></div>
+            </div>
+            <div class="top-progress">
+                <div class="top-prog-bar">
+                    <div class="top-prog-fill" id="topProgress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV DOTS -->
+    <div class="nav-dots" id="navDots"></div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 1: COVER -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-1">
+        <div class="particles" id="particles1"></div>
+        <div class="cover-tag">🎂 Birthday Edition · May 15, 2026</div>
+        <h1 class="cover-title">Nithya's<br><span>Wrapped</span></h1>
+        <p class="cover-sub">A beautifully overanalyzed documentary of one perfectly chaotic friendship.</p>
+        <div class="cover-year">OCT 2024 — MAY 2026 · ATIF × NITHYA</div>
+        <div class="scroll-hint">
+            <span>SCROLL</span>
+            <div class="arrow">↓</div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 2: BIG NUMBER -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-2">
+        <div class="particles" id="particles2"></div>
+        <p class="slide-num">// 01 · the count</p>
+        <div class="big-number">668</div>
+        <div class="big-label">messages sent together</div>
+        <p class="big-context">
+            That's <span class="highlight">668 moments</span> of choosing to reach out, reply, react, share, roast, and
+            reconnect. Every single one counted.
+        </p>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 3: WHO TEXTS MORE -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-who">
+        <p class="slide-num">// 02 · the talker reveal</p>
+        <h2 class="slide-title">Who's the <span class="highlight">Bigger</span> Yapper?</h2>
+        <p class="slide-sub">The data doesn't lie. Someone here texts a little more than the other.</p>
+        <div class="split-compare">
+            <div class="compare-card winner">
+                <div class="crown">👑</div>
+                <div class="name" style="color:var(--green)">Atif</div>
+                <div class="pct" style="color:var(--green)">53%</div>
+                <div class="count">356 MESSAGES SENT</div>
+                <div style="font-size:12px;color:var(--text-muted);margin-top:8px">Also sent <strong
+                        style="color:var(--white)">51 media files</strong><br>ChatGPT translated songs, reels, songs,
+                    Spotify links, song lyrics, more songs...</div>
+            </div>
+            <div class="compare-card">
+                <div style="font-size:32px">🙂🤝</div>
+                <div class="name">Nithya</div>
+                <div class="pct">47%</div>
+                <div class="count">312 MESSAGES SENT</div>
+                <div style="font-size:12px;color:var(--text-muted);margin-top:8px">Quality over quantity.<br>"Baga
+                    paadav 👏🏻" hits harder than a paragraph.</div>
+            </div>
+        </div>
+        <div class="verdict">⚡ OFFICIAL VERDICT: Atif talks, Nithya responds with surgical precision</div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 4: STATS GRID -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-stats" style="background:#050505;gap:32px;">
+        <p class="slide-num">// 03 · the analytics</p>
+        <h2 class="slide-title">Your <span class="highlight">Friendship</span> Stats</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="emoji">📸</div>
+                <div class="label">Media Sent Total</div>
+                <div class="value green">64</div>
+                <div class="desc">Atif: 51 · Nithya: 13. He basically runs a personal media house.</div>
+            </div>
+            <div class="stat-card">
+                <div class="emoji">🌙</div>
+                <div class="label">Prime Yapping Hour</div>
+                <div class="value yellow">6–10 PM</div>
+                <div class="desc">Classic evening owls. Dinnertime conversations that somehow never end.</div>
+            </div>
+            <div class="stat-card">
+                <div class="emoji">🎵</div>
+                <div class="label">Songs Shared</div>
+                <div class="value green">7+</div>
+                <div class="desc">Original Urdu compositions. Nithya is the unofficial beta listener of Atif's music
+                    career.</div>
+            </div>
+            <div class="stat-card">
+                <div class="emoji">📚</div>
+                <div class="label">Exam Wishes</div>
+                <div class="value pink">∞</div>
+                <div class="desc">"All the best mari" appears so often it might as well be a signature.</div>
+            </div>
+            <div class="stat-card">
+                <div class="emoji">🌍</div>
+                <div class="label">Languages Used</div>
+                <div class="value green">3</div>
+                <div class="desc">Telugu + English + Urdu/Hindi. This friendship needs its own translation app.</div>
+            </div>
+            <div class="stat-card">
+                <div class="emoji">🎭</div>
+                <div class="label">Most Active Month</div>
+                <div class="value yellow">May '25</div>
+                <div class="desc">131 messages. This month clearly had main character energy.</div>
+            </div>
+            <div class="stat-card">
+                <div class="emoji">🏆</div>
+                <div class="label">Longest Silence</div>
+                <div class="value pink">~2 mo</div>
+                <div class="desc">Dec '24 → Feb '25. But they came back stronger. Real ones always do.</div>
+            </div>
+            <div class="stat-card">
+                <div class="emoji">🌐</div>
+                <div class="label">Atif's Websites Built</div>
+                <div class="value green">1</div>
+                <div class="desc">hinithya.vercel.app — a whole birthday website. CSE major things indeed.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 5: PRIME TIME -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-time">
+        <p class="slide-num">// 04 · peak hours</p>
+        <h2 class="slide-title">Prime <span class="highlight">Yapping</span> Hours</h2>
+        <p class="slide-sub">When are these two most dangerous? The data reveals all.</p>
+        <div class="time-bars">
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill semi" style="height:30%"></div>
+                <div class="time-bar-label">8am</div>
+            </div>
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill" style="height:15%;background:var(--surface2)"></div>
+                <div class="time-bar-label">10am</div>
+            </div>
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill semi" style="height:40%"></div>
+                <div class="time-bar-label">11am</div>
+            </div>
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill" style="height:20%;background:var(--surface2)"></div>
+                <div class="time-bar-label">2pm</div>
+            </div>
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill semi" style="height:28%"></div>
+                <div class="time-bar-label">4pm</div>
+            </div>
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill semi" style="height:35%"></div>
+                <div class="time-bar-label">5pm</div>
+            </div>
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill active" style="height:100%"></div>
+                <div class="time-bar-label">6pm 🔥</div>
+            </div>
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill active" style="height:87%"></div>
+                <div class="time-bar-label">8pm</div>
+            </div>
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill active" style="height:77%"></div>
+                <div class="time-bar-label">10pm</div>
+            </div>
+            <div class="time-bar-wrap">
+                <div class="time-bar-fill active" style="height:40%"></div>
+                <div class="time-bar-label">11pm</div>
+            </div>
+        </div>
+        <p class="time-note">Peak chaos window: <strong>6 PM – 10 PM</strong> · "Reels ra" hours · Exam stress releases
+            · Song sharing sessions</p>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 6: GENRES -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-genres">
+        <p class="slide-num">// 05 · conversation genres</p>
+        <h2 class="slide-title">Your <span class="highlight">Top Genres</span></h2>
+        <p class="slide-sub">A playlist of conversations, analyzed like a Spotify librarian.</p>
+        <div class="genres-grid">
+            <div class="genre-card">
+                <div class="genre-emoji">🎵</div>
+                <div class="genre-name">Music Drops</div>
+                <div class="genre-pct" style="color:var(--green)">32%</div>
+                <div class="genre-desc">Atif shares songs. Nithya listens, judges honestly, and somehow always approves.
+                </div>
+            </div>
+            <div class="genre-card">
+                <div class="genre-emoji">📚</div>
+                <div class="genre-name">Exam Solidarity</div>
+                <div class="genre-pct" style="color:var(--yellow)">22%</div>
+                <div class="genre-desc">Mutual "all the best" energy. Nobody studies but everyone wishes each other
+                    luck.</div>
+            </div>
+            <div class="genre-card">
+                <div class="genre-emoji">😂</div>
+                <div class="genre-name">Gentle Roasts</div>
+                <div class="genre-pct" style="color:var(--pink)">18%</div>
+                <div class="genre-desc">Children's Day celebrations. Shadow boxing talents. Bloopers without content.
+                </div>
+            </div>
+            <div class="genre-card">
+                <div class="genre-emoji">🌙</div>
+                <div class="genre-name">Late Night Chaos</div>
+                <div class="genre-pct" style="color:var(--teal)">14%</div>
+                <div class="genre-desc">Random sends at 11PM. Exam tomorrow? Let's talk about Shreya. Logic? None.</div>
+            </div>
+            <div class="genre-card">
+                <div class="genre-emoji">🌍</div>
+                <div class="genre-name">Festival Wishes</div>
+                <div class="genre-pct" style="color:var(--orange)">8%</div>
+                <div class="genre-desc">Eid + Ugadi + New Year + Children's Day. Cross-cultural royalty behavior.</div>
+            </div>
+            <div class="genre-card">
+                <div class="genre-emoji">✨</div>
+                <div class="genre-name">Wholesome Drops</div>
+                <div class="genre-pct" style="color:var(--green)">6%</div>
+                <div class="genre-desc">"That's beautiful 🥹" · "Chaala baga chesar raa" · rare but hits HARD every
+                    time.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 7: EMOJIS -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-emojis">
+        <p class="slide-num">// 06 · emoji language</p>
+        <h2 class="slide-title">The <span class="highlight">Emoji</span> Vocabulary</h2>
+        <p class="slide-sub">Forget words. These emoji combos carry entire conversations.</p>
+        <div class="emoji-cloud">
+            <div class="emoji-item">
+                <div class="emoji-char" style="font-size:60px">😭</div>
+                <div class="emoji-count">ATIF'S SOUL</div>
+            </div>
+            <div class="emoji-item">
+                <div class="emoji-char" style="font-size:55px">🤣</div>
+                <div class="emoji-count">COMBO PARTNER</div>
+            </div>
+            <div class="emoji-item">
+                <div class="emoji-char" style="font-size:50px">👍🏻</div>
+                <div class="emoji-count">NITHYA'S VERDICT</div>
+            </div>
+            <div class="emoji-item">
+                <div class="emoji-char" style="font-size:45px">🤝🏻</div>
+                <div class="emoji-count">NITHYA'S STAMP</div>
+            </div>
+            <div class="emoji-item">
+                <div class="emoji-char" style="font-size:50px">😂</div>
+                <div class="emoji-count">MUTUAL ENERGY</div>
+            </div>
+            <div class="emoji-item">
+                <div class="emoji-char" style="font-size:42px">✨</div>
+                <div class="emoji-count">FESTIVAL MODE</div>
+            </div>
+            <div class="emoji-item">
+                <div class="emoji-char" style="font-size:42px">🙂</div>
+                <div class="emoji-count">ATIF'S "OK THEN"</div>
+            </div>
+            <div class="emoji-item">
+                <div class="emoji-char" style="font-size:38px">🥹</div>
+                <div class="emoji-count">NITHYA FELT IT</div>
+            </div>
+        </div>
+        <div
+            style="background:var(--surface);border-radius:14px;padding:20px 28px;max-width:600px;width:100%;text-align:center;z-index:2;position:relative">
+            <div
+                style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-bottom:10px">
+                ICONIC COMBO OF THE YEAR</div>
+            <div style="font-size:36px">😭🤣</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:8px">Atif's signature. It means: "this is
+                hilarious but also painful." Used 30+ times. No context needed.</div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 8: SLANG DICTIONARY -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-slang">
+        <p class="slide-num">// 07 · the dictionary</p>
+        <h2 class="slide-title">Official <span class="highlight">Slang</span> Dictionary</h2>
+        <p class="slide-sub">A guide for anyone confused by this friendship's trilingual chaos.</p>
+        <div class="slang-grid">
+            <div class="slang-card">
+                <div class="slang-word">Sare</div>
+                <div class="slang-def">Telugu for "okay/fine." Used 16+ times. Nithya's ultimate reply when she has
+                    nothing to argue about.</div>
+            </div>
+            <div class="slang-card">
+                <div class="slang-word">Avunu</div>
+                <div class="slang-def">Telugu for "yes." But somehow more satisfying than just saying yes. Carries
+                    energy.</div>
+            </div>
+            <div class="slang-card">
+                <div class="slang-word">Ledhu</div>
+                <div class="slang-def">Telugu for "no/don't have." Atif's answer to: Do you have a photo? Can you sing?
+                    Are you studying?</div>
+            </div>
+            <div class="slang-card">
+                <div class="slang-word">Mari</div>
+                <div class="slang-def">Telugu filler for "then/also." As in "all the best mari!" — mandatory closing
+                    word.</div>
+            </div>
+            <div class="slang-card">
+                <div class="slang-word">Papam</div>
+                <div class="slang-def">"Poor thing/aww." Nithya used it once when Atif said he can't sing. Devastating
+                    kindness.</div>
+            </div>
+            <div class="slang-card">
+                <div class="slang-word">Raa</div>
+                <div class="slang-def">Casual address. Like "dude" or "bro." Means the conversation just got real.</div>
+            </div>
+            <div class="slang-card">
+                <div class="slang-word">Nicee</div>
+                <div class="slang-def">Nithya's highest praise. Appears 9+ times. If she says "nicee" — you've won the
+                    day.</div>
+            </div>
+            <div class="slang-card">
+                <div class="slang-word">Sukriyaa</div>
+                <div class="slang-def">Urdu for "thank you." Atif drops this during festival wishes. Suddenly the
+                    friendship becomes cinematic.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 9: PERSONALITY BREAKDOWN -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-personality">
+        <p class="slide-num">// 08 · who are these people</p>
+        <h2 class="slide-title">The <span class="highlight">Personality</span> Files</h2>
+        <p class="slide-sub">Based on 668 data points, here is the official psychological profile of this duo.</p>
+        <div class="personality-grid">
+            <div class="personality-card">
+                <div class="p-header">
+                    <span style="font-size:36px">🎵</span>
+                    <div>
+                        <div class="p-name" style="color:var(--green)">Atif</div>
+                        <div class="p-title">THE CREATIVE CHAOS AGENT</div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Creative Energy</span><span
+                            class="trait-pct">98%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill" style="width:98%"></div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Sends Unsolicited Songs</span><span
+                            class="trait-pct">95%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill" style="width:95%"></div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Media Bombardment</span><span
+                            class="trait-pct">87%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill" style="width:87%"></div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Self-Deprecating Humor</span><span
+                            class="trait-pct">82%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill" style="width:82%"></div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Actually Studies</span><span
+                            class="trait-pct">12%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill" style="width:12%;background:var(--pink)"></div>
+                    </div>
+                </div>
+                <div style="font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.6">
+                    Built a birthday website. Wrote original Urdu poetry. Releasing music on Spotify. Skipped a candle
+                    concert to watch Spider-Man. Absolute main character.
+                </div>
+            </div>
+            <div class="personality-card">
+                <div class="p-header">
+                    <span style="font-size:36px">🤝🏻</span>
+                    <div>
+                        <div class="p-name" style="color:var(--pink)">Nithya</div>
+                        <div class="p-title">THE CALM CURATOR</div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Honest Criticism</span><span
+                            class="trait-pct">96%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill pink" style="width:96%"></div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Surgical Reply Precision</span><span
+                            class="trait-pct">90%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill pink" style="width:90%"></div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Encouragement Mode</span><span
+                            class="trait-pct">88%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill pink" style="width:88%"></div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Scrolling Reels Instead</span><span
+                            class="trait-pct">85%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill pink" style="width:85%"></div>
+                    </div>
+                </div>
+                <div class="trait-row">
+                    <div class="trait-label"><span class="trait-name">Actually Impressed</span><span
+                            class="trait-pct">94%</span></div>
+                    <div class="trait-bar">
+                        <div class="trait-bar-fill pink" style="width:94%"></div>
+                    </div>
+                </div>
+                <div style="font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.6">
+                    Says "nicee" and means it. Always knew Atif could sing. Approached by strangers who call her a
+                    "baddie." Handles it with a 😂. Honestly iconic.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 10: QUOTES -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-quotes">
+        <p class="slide-num">// 09 · the hall of fame</p>
+        <h2 class="slide-title">Quote <span class="highlight">Hall of Fame</span></h2>
+        <p class="slide-sub">Lines that deserve to be framed. Or at least screenshot-worthy.</p>
+        <div class="quotes-list">
+            <div class="quote-card">
+                <div class="quote-text">"Kummadaaniki talent entiki...petti kuddhadamee 😭🤣"</div>
+                <div class="quote-meta">
+                    <div class="quote-who">ATIF · OCT 2024</div>
+                    <div class="quote-why">When Nithya asked how he learned to shadow box. "What talent does it take to
+                        just punch things?" Peak self-aware humor.</div>
+                </div>
+            </div>
+            <div class="quote-card">
+                <div class="quote-text">"Chitikelu chitikelu baga paadav 👏🏻"</div>
+                <div class="quote-meta">
+                    <div class="quote-who" style="color:var(--pink)">NITHYA · NOV 2024</div>
+                    <div class="quote-why">After Atif sang for her. "You sang well." Simple. Direct. Devastating
+                        compliment from someone who said she wouldn't listen.</div>
+                </div>
+            </div>
+            <div class="quote-card">
+                <div class="quote-text">"I got this idea because of your bday, so I showed you first"</div>
+                <div class="quote-meta">
+                    <div class="quote-who">ATIF · MAY 2025</div>
+                    <div class="quote-why">About his app idea. Nithya's birthday quite literally inspired a startup
+                        concept. That's friendship as a muse.</div>
+                </div>
+            </div>
+            <div class="quote-card">
+                <div class="quote-text">"Awwwwwwww. That's beautiful 🥹 Thank youuuuu❤️❤️ I loved it"</div>
+                <div class="quote-meta">
+                    <div class="quote-who" style="color:var(--pink)">NITHYA · MAY 2025</div>
+                    <div class="quote-why">Her reaction to hinithya.vercel.app. Five "w"s in "awwwwwwww." That's the
+                        highest unit of measurement for being moved.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 11: LORE / TIMELINE -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-lore">
+        <p class="slide-num">// 10 · the origin story</p>
+        <h2 class="slide-title">The <span class="highlight">Lore</span></h2>
+        <p class="slide-sub">Every friendship has a story. This one is particularly well-documented.</p>
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-dot">🌱</div>
+                <div class="tl-content">
+                    <div class="tl-date">OCT 2024</div>
+                    <div class="tl-text">Origin: "Broo. Cool DP 👍🏻"</div>
+                    <div class="tl-sub">Nithya noticed Atif's profile picture at midnight. He clocked she turned off
+                        blue ticks. A mutual observation era begins.</div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot">🎵</div>
+                <div class="tl-content">
+                    <div class="tl-date">NOV 2024</div>
+                    <div class="tl-text">The Singing Dare Arc</div>
+                    <div class="tl-sub">Atif asked if he should sing and send. "My voice would make fun of the song." He
+                        sang anyway. Nithya said "chitikelu baga paadav." A star is born.</div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot">😂</div>
+                <div class="tl-content">
+                    <div class="tl-date">NOV 2024</div>
+                    <div class="tl-text">Children's Day Solidarity</div>
+                    <div class="tl-sub">Atif sent something. Nithya: "I only see mini you." Atif: "Happy children's day
+                        😭😂." Both got wished. Peak chaotic affection.</div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot">🌙</div>
+                <div class="tl-content">
+                    <div class="tl-date">MAR–APR 2025</div>
+                    <div class="tl-text">Cross-Cultural Festival Era</div>
+                    <div class="tl-sub">Eid Mubarak + Ugadhi Subhakankshalu in the same day. "Sukriyaaaa Nithya jii ✨" —
+                        suddenly cinematic.</div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot">🌐</div>
+                <div class="tl-content">
+                    <div class="tl-date">MAY 2025</div>
+                    <div class="tl-text">The Website Moment</div>
+                    <div class="tl-sub">Atif built hinithya.vercel.app. Nithya said "Huuuuuuu! CSE major things!!" The
+                        friendship officially entered legend status.</div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot">🎶</div>
+                <div class="tl-content">
+                    <div class="tl-date">FEB 2026</div>
+                    <div class="tl-text">Spotify Release Incoming</div>
+                    <div class="tl-sub">Atif is releasing an original song on Spotify. Nithya said: "nee voice ga neek
+                        alane untadhi lee" — defending his voice before he even doubted himself.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 12: ACHIEVEMENTS -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-achievements">
+        <p class="slide-num">// 11 · achievements unlocked</p>
+        <h2 class="slide-title">🏆 Achievements <span class="highlight">Unlocked</span></h2>
+        <p class="slide-sub">This friendship has officially earned the following credentials:</p>
+        <div class="achievements-grid">
+            <div class="achievement gold">
+                <div class="ach-icon">🎵</div>
+                <div class="ach-text">
+                    <div class="ach-name">Beta Listener Supreme</div>
+                    <div class="ach-desc">Nithya listened to 7+ original Atif songs before they were released anywhere.
+                        She's basically a A&R executive at this point.</div>
+                    <div class="ach-xp">+500 XP · LEGENDARY</div>
+                </div>
+            </div>
+            <div class="achievement green-a">
+                <div class="ach-icon">🌐</div>
+                <div class="ach-text">
+                    <div class="ach-name">Muse With a Domain Name</div>
+                    <div class="ach-desc">Got a whole website built in your honour. hinithya.vercel.app exists because
+                        of you. Not everyone can say that.</div>
+                    <div class="ach-xp">+750 XP · ULTRA RARE</div>
+                </div>
+            </div>
+            <div class="achievement pink-a">
+                <div class="ach-icon">😭🤣</div>
+                <div class="ach-text">
+                    <div class="ach-name">Certified Combo User</div>
+                    <div class="ach-desc">Atif used the 😭🤣 emoji combination so many times it basically became
+                        punctuation. Science cannot explain the emotional range.</div>
+                    <div class="ach-xp">+300 XP · COMMON (but iconic)</div>
+                </div>
+            </div>
+            <div class="achievement orange-a">
+                <div class="ach-icon">🏅</div>
+                <div class="ach-text">
+                    <div class="ach-name">Cross-Cultural Ambassador</div>
+                    <div class="ach-desc">Eid + Ugadi celebrated together in the same chat. The UN could never do what
+                        these two did in 3 messages.</div>
+                    <div class="ach-xp">+400 XP · RARE</div>
+                </div>
+            </div>
+            <div class="achievement teal-a">
+                <div class="ach-icon">🎤</div>
+                <div class="ach-text">
+                    <div class="ach-name">Sang Despite the Odds</div>
+                    <div class="ach-desc">"My voice would make fun of it" → still sang → "baga paadav." Courage >
+                        perfection. This achievement is awarded to Atif specifically.</div>
+                    <div class="ach-xp">+600 XP · EPIC</div>
+                </div>
+            </div>
+            <div class="achievement gold">
+                <div class="ach-icon">📅</div>
+                <div class="ach-text">
+                    <div class="ach-name">Festival Calendar Guardian</div>
+                    <div class="ach-desc">Never missed a single festival wish. Eid, Ugadi, Children's Day, New Year.
+                        Even wished Atif's uncle happy birthday through him.</div>
+                    <div class="ach-xp">+350 XP · UNCOMMON</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 13: ROAST SECTION -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-roast">
+        <p class="slide-num">// 12 · the roast (with love)</p>
+        <h2 class="slide-title">Official <span class="highlight-pink">Roast</span> Section</h2>
+        <p class="slide-sub">A birthday isn't complete without a little light roasting. This is a safe space.*<br><em
+                style="font-size:11px;color:var(--text-muted)">*it is not a safe space.</em></p>
+        <div class="roast-cards">
+            <div class="roast-card">
+                <div class="roast-icon">🎬</div>
+                <div class="roast-text"><strong>Bloopers Without Content</strong><br>Nithya's exact words: "Bloopers
+                    without content?! 🫡😂 wowww" — when Atif sent a blooper reel for an Instagram video he hadn't even
+                    made yet. The audacity of pre-planning failure is genuinely inspiring.</div>
+            </div>
+            <div class="roast-card">
+                <div class="roast-icon">🕷️</div>
+                <div class="roast-text"><strong>The Concert Skip of 2025</strong><br>There was a candle night concert at
+                    college. Atif decided to stay back and watch The Amazing Spider-Man instead. A friend once called
+                    out "Shreya vacchindhii" as a taunt. He said "Nevermind, nen vellale." Spider-Man won.</div>
+            </div>
+            <div class="roast-card">
+                <div class="roast-icon">📏</div>
+                <div class="roast-text"><strong>The Height Situation</strong><br>A random guy approached Nithya and she
+                    casually mentioned he wasn't even her height. Atif immediately said he'd have been offended back in
+                    school. Nobody asked. He volunteered this information. 😭</div>
+            </div>
+            <div class="roast-card">
+                <div class="roast-icon">🔵</div>
+                <div class="roast-text"><strong>The Blue Ticks Mystery</strong><br>Day 1 of the friendship: Atif noticed
+                    Nithya turned off blue ticks. His reaction: "yooo.....why do you off the blue ticks??" Nithya:
+                    "oorike pani leka" (no work to do). She's been mysterious since the very beginning.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 14: AI FAKE ANALYSIS -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-ai">
+        <p class="slide-num">// 13 · totally real AI analysis</p>
+        <h2 class="slide-title">🤖 <span class="highlight">AI</span> Friendship Report</h2>
+        <p class="slide-sub">Our completely legitimate artificial intelligence system has analyzed your bond.</p>
+        <div class="ai-box">
+            <div class="ai-header">
+                <div class="ai-dot"></div>
+                <div class="ai-label">FRIENDSHIP_ANALYZER_v2.6 · RUNNING DEEP SCAN</div>
+            </div>
+            <div class="ai-line">
+                <span class="key">bond_type</span> → <span class="val">"bilingual chaos siblings"</span><br>
+                <span class="key">vibe_score</span> → <span class="val yellow">94.7 / 100</span><br>
+                <span class="key">atif_main_trait</span> → <span class="val">"sends songs before they're ready, always
+                    good"</span><br>
+                <span class="key">nithya_main_trait</span> → <span class="val pink">"says 2 words, means
+                    everything"</span><br>
+                <span class="key">inside_joke_density</span> → <span class="val">VERY HIGH (Shreya coefficient:
+                    ∞)</span><br>
+                <span class="key">delusion_levels</span> → <span class="val yellow">PEAK · "grammer is the worst thing"
+                    pre-verbal exam</span><br>
+                <span class="key">friendship_arc</span> → <span class="val">"DP comment → website → Spotify
+                    muse"</span><br>
+                <span class="key">predicted_5yr</span> → <span class="val pink">"still sending songs. still saying
+                    nicee."</span><br>
+                <span class="key">warning_flags</span> → <span class="val yellow">atif: exam procrastination · nithya:
+                    blue tick evasion</span><br>
+                <span class="key">final_verdict</span> → <span class="val">RARE FRIENDSHIP. DO NOT LOSE.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 15: COMPATIBILITY -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-compat">
+        <p class="slide-num">// 14 · the score</p>
+        <h2 class="slide-title">Friendship <span class="highlight">Compatibility</span></h2>
+        <p class="slide-sub">Our algorithm ran for 0.003 seconds and returned these completely accurate results.</p>
+        <div class="compat-ring">
+            <svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="110" cy="110" r="100" stroke="rgba(29,185,84,0.1)" stroke-width="2"
+                    stroke-dasharray="8 4" />
+                <circle cx="110" cy="110" r="85" stroke="rgba(29,185,84,0.2)" stroke-width="1" />
+            </svg>
+            <div class="compat-center">
+                <div class="compat-score">97%</div>
+                <div class="compat-label">COMPATIBLE</div>
+            </div>
+        </div>
+        <div class="compat-bars">
+            <div class="bar-container">
+                <div class="bar-row">
+                    <div class="bar-label">Humor</div>
+                    <div class="bar-track">
+                        <div class="bar-fill green" style="width:96%">96%</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Loyalty</div>
+                    <div class="bar-track">
+                        <div class="bar-fill green" style="width:99%;animation-delay:0.1s">99%</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Chaos Sync</div>
+                    <div class="bar-track">
+                        <div class="bar-fill yellow" style="width:88%;animation-delay:0.2s">88%</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Vibe Match</div>
+                    <div class="bar-track">
+                        <div class="bar-fill pink" style="width:94%;animation-delay:0.3s">94%</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Studying</div>
+                    <div class="bar-track">
+                        <div class="bar-fill orange" style="width:11%;animation-delay:0.4s">11%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 16: FUTURE PREDICTIONS -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-future">
+        <p class="slide-num">// 15 · what's next</p>
+        <h2 class="slide-title">Future <span class="highlight">Predictions</span></h2>
+        <p class="slide-sub">AI-powered prophecies. Accuracy not guaranteed. Vibes guaranteed.</p>
+        <div class="predictions">
+            <div class="pred-card">
+                <div class="pred-year">6 MONTHS FROM NOW</div>
+                <div class="pred-text">Atif drops his first Spotify single. Nithya is the 1st stream. She says "nicee"
+                    in the comments.</div>
+                <div class="pred-conf">Confidence: <span>91%</span></div>
+            </div>
+            <div class="pred-card">
+                <div class="pred-year">1 YEAR FROM NOW</div>
+                <div class="pred-text">Atif sends another midnight song. Nithya is on a call. She calls back later. He's
+                    already moved on to the next one.</div>
+                <div class="pred-conf">Confidence: <span>99%</span></div>
+            </div>
+            <div class="pred-card">
+                <div class="pred-year">2 YEARS FROM NOW</div>
+                <div class="pred-text">Atif's app from the "idea because of your bday" is in beta. Nithya is listed in
+                    the credits. "Credits naave" becomes real.</div>
+                <div class="pred-conf">Confidence: <span>78%</span></div>
+            </div>
+            <div class="pred-card">
+                <div class="pred-year">5 YEARS FROM NOW</div>
+                <div class="pred-text">Still texting. Still trilingual. Still "all the best mari" for exams. Some things
+                    are simply constants of the universe.</div>
+                <div class="pred-conf">Confidence: <span>100%</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SLIDE 17: FINAL / EMOTIONAL ENDING -->
+    <!-- ════════════════════════════════════════════ -->
+    <section class="slide" id="slide-final">
+        <div id="confettiContainer"></div>
+        <div class="particles" id="particlesFinal"></div>
+        <div class="final-badge">🎂 Happy Birthday, Nithya</div>
+        <h1 class="final-title">Here's to<br><span style="color:var(--green)">Us.</span></h1>
+        <p class="final-message">
+            From a midnight DP comment to a birthday website, from Urdu poetry drafts to Spotify releases — you've been
+            the <em>nicee</em> to everything Atif has ever built.<br><br>
+            Thanks for being the kind of friend who says two words and means everything.
+        </p>
+        <div style="font-size:28px;position:relative;z-index:2;animation:pulse-glow 2s infinite">🎵✨🤝🏻</div>
+        <div class="final-sig">FRIENDSHIP WRAPPED · OCT 2024 – MAY 2026 · MADE WITH 668 MESSAGES OF LOVE</div>
+    </section>
+
+    <script>
+        // ── PARTICLES ──
+        function createParticles(containerId, count = 15) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const colors = ['#1DB954', '#FF2D78', '#FFD700', '#7B2D8B', '#00C9C8'];
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 8 + 3;
+                p.style.cssText = `
+        width:${size}px;height:${size}px;
+        left:${Math.random() * 100}%;
+        background:${colors[Math.floor(Math.random() * colors.length)]};
+        animation-duration:${Math.random() * 10 + 8}s;
+        animation-delay:${Math.random() * 5}s;
+      `;
+                container.appendChild(p);
+            }
+        }
+        createParticles('particles1', 20);
+        createParticles('particles2', 12);
+        createParticles('particlesFinal', 25);
+
+        // ── NAV DOTS ──
+        const slides = document.querySelectorAll('.slide');
+        const navDots = document.getElementById('navDots');
+        slides.forEach((slide, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            dot.title = slide.querySelector('.slide-num')?.textContent || `Slide ${i + 1}`;
+            dot.addEventListener('click', () => slide.scrollIntoView({ behavior: 'smooth' }));
+            navDots.appendChild(dot);
+        });
+
+        // ── PROGRESS & ACTIVE DOTS ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(slides).indexOf(entry.target);
+                    document.querySelectorAll('.nav-dot').forEach((d, i) => {
+                        d.classList.toggle('active', i === idx);
+                    });
+                    const progress = ((idx + 1) / slides.length) * 100;
+                    document.getElementById('topProgress').style.width = progress + '%';
+                    if (entry.target.id === 'slide-final') launchConfetti();
+                }
+            });
+        }, { threshold: 0.5 });
+        slides.forEach(s => observer.observe(s));
+
+        // ── CONFETTI ──
+        function launchConfetti() {
+            const container = document.getElementById('confettiContainer');
+            if (container.children.length > 0) return;
+            const colors = ['#1DB954', '#FF2D78', '#FFD700', '#7B2D8B', '#00C9C8', '#FF6B35', '#FFFFFF'];
+            for (let i = 0; i < 80; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                const size = Math.random() * 12 + 6;
+                piece.style.cssText = `
+        width:${size}px;height:${size}px;
+        left:${Math.random() * 100}%;
+        background:${colors[Math.floor(Math.random() * colors.length)]};
+        animation-duration:${Math.random() * 3 + 2}s;
+        animation-delay:${Math.random() * 2}s;
+        border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
+      `;
+                container.appendChild(piece);
+            }
+        }
+
+        // ── ANIMATE BAR-FILL on scroll into view ──
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.bar-fill, .trait-bar-fill').forEach(bar => {
+                        bar.style.animationPlayState = 'running';
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+        slides.forEach(s => barObserver.observe(s));
+
+        // ── COUNTER ANIMATION for big number ──
+        function animateCounter(el, target, duration = 1500) {
+            let start = 0;
+            const step = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += step;
+                if (start >= target) { el.textContent = target; clearInterval(timer); }
+                else el.textContent = Math.floor(start);
+            }, 16);
+        }
+        const bigNumObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target.querySelector('.big-number');
+                    if (el && !el.dataset.animated) {
+                        el.dataset.animated = '1';
+                        animateCounter(el, 668);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+        const slide2 = document.getElementById('slide-2');
+        if (slide2) bigNumObserver.observe(slide2);
+    </script>
+</body>
+
+</html>
